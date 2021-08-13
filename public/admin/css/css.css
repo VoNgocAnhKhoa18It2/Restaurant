@@ -17,8 +17,19 @@ input[type="date"]{
   right 1rem
   center
   no-repeat;
-  
   cursor:pointer;
+}
+#upload {
+  position: absolute;
+  display: none;
+  top:-40%;
+  left:35%;
+  background: rgba(0,0,0,0.8);
+  color: white;
+}
+
+#image-upload:hover #upload {
+  display: block;
 }
 
 select,input[type="search"]{

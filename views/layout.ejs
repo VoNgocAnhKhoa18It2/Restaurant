@@ -1,8 +1,11 @@
-<% const arrPage = ["Login","Register",'Admin'] %>
+<% 
+const arrPage = ["Login","Register",'Admin'];
+%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <base href="http://localhost:1201/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%-title %></title>
@@ -81,7 +84,7 @@
     </style>
 </head>
 
-<body> 
+<body>
     <% if (arrPage.indexOf(title) == -1) { %>
       <% if(title.indexOf(arrPage[2]) != -1) { %>
         <%- include('pageAdmin/menu.ejs') %>

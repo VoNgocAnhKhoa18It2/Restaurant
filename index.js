@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 
 const loginRouter = require('./routers/login.router')
 const adminRouter = require('./routers/admin.router')
@@ -19,7 +20,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cookieParser("mySecretKey"))
-
+app.use(fileUpload())
 app.set('view engine', 'ejs');
 app.use((req, res, next) => {
     if (req.signedCookies.user_id) {
