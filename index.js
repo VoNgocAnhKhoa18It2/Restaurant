@@ -9,7 +9,8 @@ const fileUpload = require('express-fileupload');
 
 const loginRouter = require('./routers/login.router')
 const adminRouter = require('./routers/admin.router')
-const loginController = require('./controllers/login.controller')
+const homeRouter = require('./routers/home.router')
+
 
 
 
@@ -44,6 +45,7 @@ app.use(
 );
 
 
+app.use("/", homeRouter)
 app.use("/login", loginRouter)
 app.use("/admin", adminRouter)
 
@@ -55,5 +57,3 @@ mongoose.connect(process.env.DB_URL, {
 })
     .then(() => console.log("Connect DB Success"))
     .catch((err) => console.error(err));
-
-app.get('/', loginController.index)

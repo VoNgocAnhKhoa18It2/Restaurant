@@ -8,6 +8,26 @@
         return s
     }
 %> 
+<script>
+    $(document).ready(function () {
+        $("a#add-cart").click(function () {
+            var id = $(this).attr("id-food")
+            var check = $('body #snackbar')
+            if (check != null) {
+                check.remove();
+            }
+            $.get(url + "add-cart/" + id, function (data) {
+                $('#lblCartCount').text(data)   
+                $("body").append(`<div id="snackbar">Thêm Giỏ Hàng Thành Công</div>`)
+                myFunction()
+            });
+        })
+
+        $.get(url + "add-cart/1", function (data) {
+            $('#lblCartCount').text(data)
+        });
+    });
+</script>
 <header>
 
     <a href="#" class="logo"><i class="fas fa-utensils"></i>food</a>
@@ -17,15 +37,18 @@
     <nav class="navbar d-block">
         <div>
             <span>
-                <a href="#home">Home</a>
-                <a href="#speciality">speciality</a>
-                <a href="#popular">popular</a>
-                <a href="#gallery">gallery</a>
-                <a href="#review">review</a>
-                <a href="#order">order</a>
+                <a href="/">Home</a>
+                <a href="/foods">foods</a>
+                <a href="#">popular</a>
+                <a href="#">gallery</a>
+                <a href="#">review</a>
+                <a href="/order">order</a>
             </span>
             <span>
-                <a href=""><i class="fas fa-shopping-cart"></i></a>
+                <a href="/carts">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+                </a>
                 <% if (user) { %>
                     <div class="dropdown d-inline">
                         <a style="text-transform: none;"class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -46,3 +69,19 @@
         </div>
     </nav>
 </header>
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3>food made with love</h3>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas accusamus tempore temporibus rem
+            amet laudantium animi optio voluptatum. Natus obcaecati unde porro nostrum ipsam itaque impedit
+            incidunt rem quisquam eos!</p>
+        <a href="#" class="btn1">order now</a>
+    </div>
+
+    <div class="image">
+        <img src="/assets/images/home-img.png" alt="">
+    </div>
+
+</section>

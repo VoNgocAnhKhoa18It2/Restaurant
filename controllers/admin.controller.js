@@ -1,5 +1,6 @@
 const User = require('../models/user.model')
 const Food = require('../models/food.model')
+const Order = require('../models/order.model')
 
 module.exports = {
     // Show doashboard
@@ -141,5 +142,18 @@ module.exports = {
         } else {
             res.send(false);
         }
-    }
+    },
+
+    //show orders
+    orders: async (req, res) => {
+        const status = req.session.status
+        if (status != undefined) req.session.status = undefined
+        const orders = await Order.find();
+        res.render('pageAdmin/order',{
+            title: 'Admin | Order',
+            status: status,
+            user: res.locals.user,
+            orders: orders
+        })
+    },
 }

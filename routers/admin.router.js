@@ -17,4 +17,7 @@ router.post('/add-foods',adminController.addFood)
 router.post('/edit-foods',adminController.editFood)
 router.get('/delete-foods/:id',adminController.deleteFood)
 
+//router order
+router.get('/orders',adminController.orders)
+
 module.exports = router;

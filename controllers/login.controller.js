@@ -1,17 +1,6 @@
 const User = require('../models/user.model')
 
 module.exports = {
-
-    index: (req, res) => {
-        const status = req.session.status
-        if (status != undefined) req.session.status = undefined
-        res.render("page/home", {
-            title: "Home",
-            status: status,
-            user: res.locals.user
-        })
-    },
-    
     // show trang đăng nhập
     login: (req, res) => {
         const status = req.session.status
@@ -35,7 +24,7 @@ module.exports = {
     // Xử lý đăng nhập
     loginPost: async (req, res) => {
         var userReq = req.body;
-        if (userReq.email == 'admin@gmail.com' || userReq.password == '123') {
+        if (userReq.email == 'admin@gmail.com' && userReq.password == '123') {
             req.session.status = "Đăng Nhập Thành Công"
             res.cookie('user_id', userReq.email, {
                 signed: true
