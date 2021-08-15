@@ -19,5 +19,6 @@ router.get('/delete-foods/:id',adminController.deleteFood)
 
 //router order
 router.get('/orders',adminController.orders)
+router.get('/delete-orders/:id',adminController.deleteOrder)
 
 module.exports = router;

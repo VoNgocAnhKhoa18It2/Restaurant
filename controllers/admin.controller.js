@@ -4,14 +4,20 @@ const Order = require('../models/order.model')
 
 module.exports = {
     // Show doashboard
-    index: (req, res) => {
+    index: async (req, res) => {
         const status = req.session.status
         if (status != undefined) req.session.status = undefined
-        console.log(res.locals.user);
+        const numUser = await (await User.find()).length;
+        const numFood = await (await Food.find()).length;
+        const numOrder = await (await Order.find()).length;
+
         res.render('pageAdmin/home',{
             title: 'Admin | Home',
             status: status,
-            user: res.locals.user
+            user: res.locals.user,
+            numFood: numFood,
+            numOrder: numOrder,
+            numUser: numUser,
         })
     },
 
@@ -108,6 +114,7 @@ module.exports = {
         })
     },
 
+    //edit food
     editFood: async (req, res) => {
         const filter = { _id: req.body.edit };
         var update = {}
@@ -155,5 +162,16 @@ module.exports = {
             user: res.locals.user,
             orders: orders
         })
+    },
+
+    //delete order
+    deleteOrder: async (req, res) => {
+        const _id = req.params.id;
+        const doc = await Order.deleteOne({ _id: _id });
+        if (doc.ok == 1) {
+            res.send(true);
+        } else {
+            res.send(false);
+        }
     },
 }

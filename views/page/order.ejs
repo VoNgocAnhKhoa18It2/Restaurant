@@ -54,16 +54,16 @@
         <form class="col-sm" id="order-form" method="post" action="/order">
 
             <div class="inputBox">
-                <input type="text" name = "fullName" placeholder="full name">
-                <input type="email" name = "email" placeholder="email">
+                <input type="text" name = "fullName" placeholder="full name" required>
+                <input type="email" name = "email" placeholder="email" required>
             </div>
 
             <div class="inputBox">
-                <input type="number" name = "phoneNumber" placeholder="phone number">
-                <input type="number" name = "cardNumber" placeholder="card number">
+                <input type="number" name = "phoneNumber" placeholder="phone number" required>
+                <input type="number" name = "cardNumber" placeholder="card number" required>
             </div>
 
-            <textarea placeholder="address" name="address" id="address" cols="30" rows="10"></textarea>
+            <textarea placeholder="address" name="address" id="address" cols="30" rows="10" required></textarea>
             <input type="hidden" name="total" value = "<%- Math.round((sub_total*0.95 + 20)*1000)/1000 %>">
 
             <input type="submit" value="order now" class="btn1">

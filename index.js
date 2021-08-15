@@ -44,10 +44,18 @@ app.use(
     })
 );
 
+const checkAdmin = (req, res, next) => {
+    if (req.signedCookies.user_id != 'admin@gmail.com') {
+        req.session.status = "Vui Lòng Đăng Nhập Với Tài Khoản Admin"
+        res.redirect("/login")
+    }
+    next()
+}
+
 
 app.use("/", homeRouter)
 app.use("/login", loginRouter)
-app.use("/admin", adminRouter)
+app.use("/admin",checkAdmin,adminRouter)
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
 

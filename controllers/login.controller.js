@@ -50,16 +50,26 @@ module.exports = {
     // xử lý đăng ký
     registerPost: async (req, res) => {
         var user = req.body;
-
-        var checkuser = await User.findOne({email: user.email});
-        if (checkuser == null) {
-			await new User(user).save()
-            req.session.status = "Đăng Ký Thành Công"
-			res.redirect("/login");
-		} else {
+        if (user.email == 'admin@gmail.com' || user.email == 'admin@gmail.com' && user.password == '123') {
             req.session.status = "Đăng Ký Thất Bại"
-			res.redirect("/login/register");
-		}
+            res.redirect("/login/register");
+        } else {
+            if (/@gmail\.com$/.test(user.email)) {
+
+                var checkuser = await User.findOne({email: user.email});
+                if (checkuser == null) {
+                    await new User(user).save()
+                    req.session.status = "Đăng Ký Thành Công"
+                    res.redirect("/login");
+                } else {
+                    req.session.status = "Đăng Ký Thất Bại"
+                    res.redirect("/login/register");
+                }
+            } else {
+                req.session.status = "Đăng Ký Thất Bại"
+                res.redirect("/login/register");
+            }
+        }
     },
 
     logout: (req, res) => {
